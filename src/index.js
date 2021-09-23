@@ -39,13 +39,13 @@ app.post("/users", (request, response) => {
 
   users.push(newUser);
 
-  return response.status(200).json(newUser);
+  return response.status(201).json(newUser);
 });
 
 app.get("/todos", checksExistsUserAccount, (request, response) => {
   const { user } = request;
 
-  return response.status(200).json(user.todos);
+  return response.json(user.todos);
 });
 
 app.post("/todos", checksExistsUserAccount, (request, response) => {
@@ -62,11 +62,25 @@ app.post("/todos", checksExistsUserAccount, (request, response) => {
 
   user.todos.push(todo);
 
-  return response.status(200).json(todo);
+  return response.status(201).json(todo);
 });
 
 app.put("/todos/:id", checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { username } = request;
+  const { title, deadline } = request.body;
+  const { id } = request.params;
+
+  const todo = username.todos.find((todo) => todo.id === id);
+
+  if (!todo) return response.status(404).json({ error: "Mensagem do erro" });
+
+  todo = {
+    ...todo,
+    title,
+    deadline: new Date(deadline),
+  };
+
+  return response.status(201).send();
 });
 
 app.patch("/todos/:id/done", checksExistsUserAccount, (request, response) => {
