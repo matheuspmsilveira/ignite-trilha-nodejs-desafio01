@@ -22,4 +22,4 @@
 
 <h2>DELETE /todos/:id</h2>
 
-- [ ] A rota deve receber, pelo header da requisição, uma propriedade username contendo o username do usuário e excluir o *todo* que possuir um id igual ao id presente nos parâmetros da rota.
+- [x] A rota deve receber, pelo header da requisição, uma propriedade username contendo o username do usuário e excluir o *todo* que possuir um id igual ao id presente nos parâmetros da rota.
